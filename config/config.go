@@ -102,9 +102,10 @@ func mergeGlobalConf(c, g *Conf) error {
 	}
 	// perform directory copy manually because rclone only support file copy
 	if c.Remote[len(c.Remote)-1] == '/' {
-		// split with \
+		// split with \ on windows
+		// split with / on linux
 		_, filename := filepath.Split(c.Path)
-		// join with /
+		// always join with /
 		c.Remote = path.Join(c.Remote, filename)
 		log.Printf("Perform directory copy for %s to %s because remote end with /\n", c.Path, c.Remote)
 	}

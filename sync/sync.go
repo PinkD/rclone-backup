@@ -15,15 +15,17 @@ import (
 )
 
 func appendHomeEnv(cmd *exec.Cmd) error {
-	// TODO: check on linux
-	_, ok := os.LookupEnv("HOME")
-	if ok {
+	home, ok := os.LookupEnv("HOME")
+	if !ok {
+		log.Println("HOME is not set, try to find it manually")
+		var err error
+		home, err = os.UserHomeDir()
+		if err != nil {
+			return err
+		}
 		return nil
 	}
-	home, err := os.UserHomeDir()
-	if err != nil {
-		return err
-	}
+	log.Printf("HOME is %s\n", home)
 	cmd.Env = append(cmd.Env, fmt.Sprintf("HOME=%s", home))
 	return nil
 }
