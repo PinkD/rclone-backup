@@ -4,11 +4,12 @@ backup your directories with rclone
 
 ## Usage
 
+- build
 - setup rclone
     - you need to download [rclone](https://github.com/rclone/rclone) and set up a remote
 - add config
     - see `config` section for detail
-- just run it
+- just run it/start it by systemd
 
 ## Config
 
@@ -45,6 +46,22 @@ template:
   - run interval, if a work is still running, it won't be triggered again
 - `proxy` (optional)
   - proxy for rclone, only support http and https (**no socks5**)
+
+## Build
+
+### Binary
+
+```shell
+go build -o "rclone-backup"
+```
+
+### PKGBUILD
+
+```shell
+cd misc
+makepkg -s
+pacman -U *.tar.zst
+```
 
 ## License
 

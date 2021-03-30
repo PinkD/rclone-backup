@@ -1,0 +1,10 @@
+[Unit]
+Description=A program to backup your directories with rclone
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone-backup -c /etc/rclone-backup/%i.json
+
+[Install]
+WantedBy=multi-user.target

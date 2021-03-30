@@ -1,0 +1,19 @@
+[
+  {
+    "name": "-",
+    "remote": "gd:/backup",
+    "interval": "1h",
+    "proxy": "http://127.0.0.1:1080"
+  },
+  {
+    "name": "path1",
+    "path": "/path1"
+  },
+  {
+    "name": "path2",
+    "path": "/path2",
+    "interval": "1d",
+    "remote": "gd:/project",
+    "proxy": "https://127.0.0.1:1080"
+  }
+]

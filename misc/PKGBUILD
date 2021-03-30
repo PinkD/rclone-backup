@@ -1,0 +1,24 @@
+pkgname=rclone-backup
+_pkgbase=rclone-backup
+pkgver=1.0
+pkgrel=1
+pkgdesc='Backup your directories with rclone'
+arch=('x86_64')
+url='https://github.com/PinkD/rclone-backup'
+license=('Apache2')
+depends=('rclone')
+makedepends=('go')
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+build() {
+  cd "$srcdir/$_pkgbase"
+  CGO_ENABLED=0 go build -ldflags "-s -w" -o "$pkgname"
+}
+
+package() {
+  cd "$srcdir/$_pkgbase"
+  install -Dm 755 "$pkgname" "$pkgdir/usr/bin/$pkgname"
+  install -Dm 644 "misc/template.json" "$pkgdir/etc/$pkgname/template.json"
+  install -Dm 644 "misc/$pkgname@.service" "$pkgdir/usr/lib/systemd/system/$pkgname@.service"
+}
